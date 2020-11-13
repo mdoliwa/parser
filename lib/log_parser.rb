@@ -26,7 +26,11 @@ class PageViewsAnalyzer
   end
 
   def register_page_view(page_view)
-    pages[page_view.page] = pages[page_view.page].to_i + 1
+    if pages[page_view.page]
+      pages[page_view.page] += 1
+    else
+      pages[page_view.page] = 1
+    end
   end
 
   def print_report
@@ -37,4 +41,23 @@ class PageViewsAnalyzer
 end
 
 class UniquePageViewsAnalyzer
+  attr_reader :pages
+
+  def initialize
+    @pages = {}
+  end
+
+  def register_page_view(page_view)
+    if pages[page_view.page]
+      pages[page_view.page] << page_view.ip
+    else
+      pages[page_view.page] = Set[page_view.ip]
+    end
+  end
+
+  def print_report
+    pages
+      .sort_by{|page, ips| -ips.size}
+      .map{|page, ips| "#{page} #{ips.size}"}
+  end
 end

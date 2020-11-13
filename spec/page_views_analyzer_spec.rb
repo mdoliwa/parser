@@ -12,7 +12,7 @@ describe PageViewsAnalyzer do
         ['help', '4.4.4.4'],
         ['help', '4.4.4.4'],
         ['help', '4.4.4.4'],
-        ['help', '4.4.4.4']
+        ['help', '5.5.5.5']
       ]
 
       page_views
