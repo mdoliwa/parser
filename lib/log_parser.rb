@@ -1,35 +1,40 @@
 class LogParser
   attr_reader :path, :data
 
-  def initialize(path)
+  def initialize(path, analyzers = [])
     @path = path
-    @data = {}
   end
 
-  def prepare_data
+  def call
     File.readlines(path).each do |line|
-      page, ip = line.split(/\s+/)
+      page_view = LogLineParser.new(line).call
 
-      data[page] = data[page] ? data[page] << ip : [ip]
+      analyzers.each{ |analyzer| analyzer.register_page_view(page_view) }
     end
-  end
 
-  def page_views
-    prepare_data if data.empty?
-
-    data.
-      sort_by{|page, ips| -ips.length}.
-      map{|page, ips| "#{page} #{ips.length}"}.
-      join("\n")
-  end
-
-  def unique_page_views
-    prepare_data if data.empty?
-
-    data.
-      sort_by{|page, ips| -ips.uniq.length}.
-      map{|page, ips| "#{page} #{ips.uniq.length}"}.
-      join("\n")
+    analyzers.each(&:print_report)
   end
 end
 
+class PageView < Struct.new(:page, :ip); end
+
+class PageViewsAnalyzer
+  attr_reader :pages
+
+  def initialize
+    @pages = {}
+  end
+
+  def register_page_view(page_view)
+    pages[page_view.page] = pages[page_view.page].to_i + 1
+  end
+
+  def print_report
+    pages
+      .sort_by{|page, page_views_count| -page_views_count}
+      .map{|page, page_views_count| "#{page} #{page_views_count}"}
+  end
+end
+
+class UniquePageViewsAnalyzer
+end
