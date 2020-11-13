@@ -36,7 +36,7 @@ class PageViewsAnalyzer
   def print_report
     pages
       .sort_by{|page, page_views_count| -page_views_count}
-      .map{|page, page_views_count| "#{page} #{page_views_count}"}
+      .map{|page, page_views_count| "#{page} #{page_views_count} visits"}
   end
 end
 
@@ -58,6 +58,6 @@ class UniquePageViewsAnalyzer
   def print_report
     pages
       .sort_by{|page, ips| -ips.size}
-      .map{|page, ips| "#{page} #{ips.size}"}
+      .map{|page, ips| "#{page} #{ips.size} unique views"}
   end
 end

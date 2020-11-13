@@ -20,7 +20,7 @@ describe UniquePageViewsAnalyzer do
         .map{|page, ip| PageView.new(page, ip)}
         .each{|page_view| analyzer.register_page_view(page_view)}
 
-      expect(analyzer.print_report).to eq ["about 3", "pricing 2", "help 1"]
+      expect(analyzer.print_report).to eq ["about 3 unique views", "pricing 2 unique views", "help 1 unique views"]
     end
   end
 end
