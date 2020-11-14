@@ -17,8 +17,8 @@ class UniquePageViewsAnalyzer
 
   def print_report
     puts pages
-      .sort_by{|page, ips| -ips.size}
-      .map{|page, ips| "#{page} #{ips.size} unique views"}
+      .sort_by { |page, ips| -ips.size }
+      .map { |page, ips| "#{page} #{ips.size} unique views" }
 
     puts
   end

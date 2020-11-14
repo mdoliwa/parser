@@ -15,8 +15,8 @@ class PageViewsAnalyzer
 
   def print_report
     puts pages
-      .sort_by{|page, page_views_count| -page_views_count}
-      .map{|page, page_views_count| "#{page} #{page_views_count} visits"}
+      .sort_by { |page, page_views_count| -page_views_count }
+      .map { |page, page_views_count| "#{page} #{page_views_count} visits" }
 
     puts
   end

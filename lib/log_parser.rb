@@ -6,7 +6,7 @@ require_relative 'analyzers/unique_page_views_analyzer'
 class LogParser
   attr_reader :path, :analyzers
 
-  def initialize(path, analyzers: [] )
+  def initialize(path, analyzers: [])
     @path = path
     @analyzers = analyzers
   end
