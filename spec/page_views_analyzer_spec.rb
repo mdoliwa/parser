@@ -23,6 +23,7 @@ describe PageViewsAnalyzer do
         help 4 visits
         about 2 visits
         pricing 1 visits
+
       EOF
 
       expect{analyzer.print_report}.to output(expected_output).to_stdout

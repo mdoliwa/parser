@@ -17,6 +17,8 @@ class PageViewsAnalyzer
     puts pages
       .sort_by{|page, page_views_count| -page_views_count}
       .map{|page, page_views_count| "#{page} #{page_views_count} visits"}
+
+    puts
   end
 end
 

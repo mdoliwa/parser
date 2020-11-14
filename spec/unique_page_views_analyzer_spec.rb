@@ -24,6 +24,7 @@ describe UniquePageViewsAnalyzer do
         about 3 unique views
         pricing 2 unique views
         help 1 unique views
+
       EOF
 
       expect{analyzer.print_report}.to output(expected_output).to_stdout

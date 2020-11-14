@@ -1,3 +1,5 @@
+require 'set'
+
 class UniquePageViewsAnalyzer
   attr_reader :pages
 
@@ -17,6 +19,8 @@ class UniquePageViewsAnalyzer
     puts pages
       .sort_by{|page, ips| -ips.size}
       .map{|page, ips| "#{page} #{ips.size} unique views"}
+
+    puts
   end
 end
 

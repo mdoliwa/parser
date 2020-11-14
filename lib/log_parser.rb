@@ -1,7 +1,7 @@
-require 'log_line_parser'
-require 'page_view'
-require 'analyzers/page_views_analyzer'
-require 'analyzers/unique_page_views_analyzer'
+require_relative 'log_line_parser'
+require_relative 'page_view'
+require_relative 'analyzers/page_views_analyzer'
+require_relative 'analyzers/unique_page_views_analyzer'
 
 class LogParser
   attr_reader :path, :analyzers
@@ -11,7 +11,7 @@ class LogParser
     @analyzers = analyzers
   end
 
-  def call
+  def print_report
     File.readlines(path).each do |line|
       page_view = LogLineParser.new(line).call
 
