@@ -19,7 +19,13 @@ describe PageViewsAnalyzer do
         .map{|page, ip| PageView.new(page, ip)}
         .each{|page_view| analyzer.register_page_view(page_view)}
 
-      expect(analyzer.print_report).to eq ["help 4 visits", "about 2 visits", "pricing 1 visits"]
+      expected_output = <<~EOF
+        help 4 visits
+        about 2 visits
+        pricing 1 visits
+      EOF
+
+      expect{analyzer.print_report}.to output(expected_output).to_stdout
     end
   end
 end

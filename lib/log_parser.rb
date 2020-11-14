@@ -1,8 +1,9 @@
 class LogParser
-  attr_reader :path, :data
+  attr_reader :path, :analyzers
 
-  def initialize(path, analyzers = [])
+  def initialize(path, analyzers: [] )
     @path = path
+    @analyzers = analyzers
   end
 
   def call
@@ -34,7 +35,7 @@ class PageViewsAnalyzer
   end
 
   def print_report
-    pages
+    puts pages
       .sort_by{|page, page_views_count| -page_views_count}
       .map{|page, page_views_count| "#{page} #{page_views_count} visits"}
   end
@@ -56,7 +57,7 @@ class UniquePageViewsAnalyzer
   end
 
   def print_report
-    pages
+    puts pages
       .sort_by{|page, ips| -ips.size}
       .map{|page, ips| "#{page} #{ips.size} unique views"}
   end
